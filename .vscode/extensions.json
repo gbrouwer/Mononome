@@ -1,5 +1,8 @@
 {
   "recommendations": [
-    "Natizyskunk.sftp"
+    "natizyskunk.sftp"
+  ],
+  "unwantedRecommendations": [
+    "satiromarra.code-sftp"
   ]
 }
