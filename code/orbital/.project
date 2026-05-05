@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:51:47.560410443Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/P1505/orbital",
+  "catalog_entry": {
+    "project_name": "orbital",
+    "project_url": "https://github.com/P1505/orbital",
+    "author": "P1505",
+    "description": "orbital is an experiment in simple sequences and interface design",
+    "discussion_url": "https://llllllll.co/t/orbital-norns/21379",
+    "tags": [
+      "sequencer",
+      "art"
+    ]
+  }
+}

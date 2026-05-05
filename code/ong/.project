@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:18:31.571597581Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/dst78/ong",
+  "catalog_entry": {
+    "project_name": "ong",
+    "project_url": "https://github.com/dst78/ong",
+    "author": "anoikisnomads",
+    "description": "ocean noise generator",
+    "discussion_url": "https://llllllll.co/t/ong-ocean-noise-generator-for-monome-norns/50364/3",
+    "tags": [
+      "art"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-01-27T17:23:12.081011302Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/markwheeler/molly_the_poly",
+  "catalog_entry": {
+    "project_name": "molly_the_poly",
+    "project_url": "https://github.com/markwheeler/molly_the_poly",
+    "author": "markeats",
+    "description": "classic polysynth with solar system patch creator",
+    "discussion_url": "https://llllllll.co/t/molly-the-poly/21090",
+    "tags": [
+      "synth",
+      "grid",
+      "midi"
+    ]
+  }
+}

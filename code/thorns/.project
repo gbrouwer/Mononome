@@ -1,0 +1,24 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-12T00:22:10.591880282Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/mpelath/thorns",
+  "catalog_entry": {
+    "project_name": "thorns",
+    "project_url": "https://github.com/mpelath/thorns",
+    "author": "mpelath",
+    "description": "fractal sequencer for norns + grid",
+    "discussion_url": "https://llllllll.co/t/thorns-a-fractal-sequencer/73644",
+    "documentation_url": "https://github.com/mpelath/thorns/blob/main/README.md",
+    "tags": [
+      "norns",
+      "grid",
+      "midi",
+      "sequencer",
+      "generative"
+    ]
+  }
+}

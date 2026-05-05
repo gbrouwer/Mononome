@@ -1,0 +1,16 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-07T22:34:01.481826836Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/jaseknighter/krill",
+  "catalog_entry": {
+    "project_name": "krill",
+    "project_url": "https://github.com/jaseknighter/krill",
+    "author": "jaseknighter",
+    "description": "a Lorenz system sequencer and mod matrix with a physical modelling synthesis engine",
+    "discussion_url": "https://llllllll.co/t/54975"
+  }
+}

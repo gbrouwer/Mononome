@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:24:18.692866864Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/tehn/mlr",
+  "catalog_entry": {
+    "project_name": "mlr",
+    "project_url": "https://github.com/tehn/mlr",
+    "author": "tehn",
+    "description": "live sample-cutting platform",
+    "discussion_url": "https://llllllll.co/t/21145",
+    "tags": [
+      "sequencer",
+      "sampler",
+      "looper",
+      "delay",
+      "grid"
+    ]
+  }
+}

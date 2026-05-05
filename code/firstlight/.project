@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2022-02-26T20:00:05.960167385Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome/firstlight",
+  "catalog_entry": {
+    "project_name": "firstlight",
+    "project_url": "https://github.com/monome/firstlight",
+    "description": "study zero",
+    "discussion_url": "https://l.llllllll.co/firstlight",
+    "tags": [
+      "study",
+      "demo"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-03-31T19:50:37.228907036+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/dstroud/dreamsequence",
+  "catalog_entry": {
+    "project_name": "dreamsequence",
+    "project_url": "https://github.com/dstroud/dreamsequence",
+    "author": "modularbeat",
+    "description": "chord-based sequencer, arpeggiator, and harmonizer for norns + grid",
+    "discussion_url": "http://llllllll.co/t/62607",
+    "documentation_url": "https://github.com/dstroud/dreamsequence/blob/main/README.md",
+    "tags": [
+      "sequencer",
+      "grid",
+      "crow",
+      "midi",
+      "nb"
+    ]
+  }
+}

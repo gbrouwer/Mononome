@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:15:18.250151075Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome-community/nc01-drone",
+  "catalog_entry": {
+    "project_name": "nc01-drone",
+    "project_url": "https://github.com/monome-community/nc01-drone",
+    "author": "norns-community",
+    "description": "norns/circle/01 drone in three worlds",
+    "discussion_url": "https://llllllll.co/t/norns-circle-01-drone-in-three-worlds/28582",
+    "tags": [
+      "art"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:51:54.379833743Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/markwheeler/overwintering",
+  "catalog_entry": {
+    "project_name": "overwintering",
+    "project_url": "https://github.com/markwheeler/overwintering",
+    "author": "markeats",
+    "description": "Bird migration patterns as sound",
+    "discussion_url": "https://llllllll.co/t/overwintering/58444",
+    "tags": [
+      "generative"
+    ]
+  }
+}

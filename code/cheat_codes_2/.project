@@ -1,0 +1,27 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:19:15.502193192Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/dndrks/cheat_codes_2",
+  "catalog_entry": {
+    "project_name": "cheat_codes_2",
+    "project_url": "https://github.com/dndrks/cheat_codes_2",
+    "author": "dan_derks",
+    "description": "a sample playground",
+    "discussion_url": "https://l.llllllll.co/cheat-codes-2",
+    "documentation_url": "https://norns.community/authors/dan_derks/cheat_codes_2",
+    "tags": [
+      "sampler",
+      "delay",
+      "looper",
+      "sequencer",
+      "midi",
+      "arc",
+      "grid",
+      "jf"
+    ]
+  }
+}

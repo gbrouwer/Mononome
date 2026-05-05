@@ -1,0 +1,34 @@
+* text=auto
+.gitattributes text eol=lf
+
+# Norns/source text should stay LF for the device.
+*.lua text eol=lf
+*.sc text eol=lf
+*.scd text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.svg text eol=lf
+*.pset text eol=lf
+
+# Windows helper scripts.
+*.ps1 text eol=crlf
+
+# Binary/media assets.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.pdf binary
+*.wav binary
+*.aif binary
+*.aiff binary
+*.flac binary
+*.mp3 binary
+*.zip binary
+*.so binary

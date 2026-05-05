@@ -1,0 +1,13 @@
+[{
+  "params": [],
+  "type": "midi",
+  "unique": true,
+  
+  "polyphonic": false,
+  "value": 12,
+  "default_midi_device": 1,
+  "default_midi_channel": 10,
+  "name": "DRM Snare",
+  "id": "drm-sd",
+  "fixed_note": 38
+}]

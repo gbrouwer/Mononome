@@ -1,0 +1,25 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:20:20.430920642Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/subvertnormality/mosaic",
+  "catalog_entry": {
+    "project_name": "mosaic",
+    "project_url": "https://github.com/subvertnormality/mosaic",
+    "author": "byzero",
+    "description": "enabling you to craft complex rhythms and harmonies effortlessly",
+    "discussion_url": "https://llllllll.co/t/mosaic/69304",
+    "tags": [
+      "sequencer",
+      "midi",
+      "generative",
+      "grid",
+      "nb",
+      "crow",
+      "keyboard"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:13:06.844967822Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/ambalek/raindrops",
+  "catalog_entry": {
+    "project_name": "raindrops",
+    "project_url": "https://github.com/ambalek/raindrops",
+    "author": "ambalek",
+    "description": "generative melodies complete with lo-fi effects",
+    "discussion_url": "https://llllllll.co/t/raindrops-simple-generative-synth-sequencer/47633",
+    "documentation_url": "https://llllllll.co/t/raindrops-simple-generative-synth-sequencer/47633",
+    "tags": [
+      "sequencer",
+      "generative",
+      "synth",
+      "midi"
+    ]
+  }
+}

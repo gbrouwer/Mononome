@@ -1,0 +1,13 @@
+[{
+  "params": [],
+  "type": "midi",
+  "unique": true,
+  
+  "polyphonic": false,
+  "value": 11,
+  "default_midi_device": 1,
+  "default_midi_channel": 10,
+  "name": "DRM Multi",
+  "id": "drm-multi",
+  "fixed_note": 56
+}]

@@ -1,0 +1,26 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-07T22:47:42.329975481Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/jaseknighter/flora",
+  "catalog_entry": {
+    "project_name": "flora",
+    "project_url": "https://github.com/jaseknighter/flora",
+    "author": "jaseknighter",
+    "description": "l-systems sequencer and bandpass-filtered sawtooth engine",
+    "discussion_url": "https://llllllll.co/t/40261",
+    "documentation_url": "https://norns.community/authors/jaseknighter/flora",
+    "tags": [
+      "generative",
+      "synth",
+      "sequencer",
+      "midi",
+      "crow",
+      "jf",
+      "w/"
+    ]
+  }
+}

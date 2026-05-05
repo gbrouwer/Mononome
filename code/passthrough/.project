@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:10:19.540532468Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/nattog/passthrough",
+  "catalog_entry": {
+    "project_name": "passthrough",
+    "project_url": "https://github.com/nattog/passthrough",
+    "author": "nattog",
+    "description": "midi passthrough library with examples",
+    "discussion_url": "https://llllllll.co/t/passthrough/31156",
+    "documentation_url": "https://norns.community/authors/nattog/passthrough",
+    "tags": [
+      "utility",
+      "mod",
+      "midi"
+    ]
+  }
+}

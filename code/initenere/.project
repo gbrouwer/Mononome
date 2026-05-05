@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:51:03.708342892Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/linusschrab/initenere",
+  "catalog_entry": {
+    "project_name": "initenere",
+    "project_url": "https://github.com/linusschrab/initenere",
+    "author": "vicimity",
+    "description": "2-dimensional polyrythmic, random note sequencer.",
+    "discussion_url": "https://llllllll.co/t/initenere/41193",
+    "documentation_url": "https://norns.community/authors/vicimity/initenere",
+    "tags": [
+      "sequencer",
+      "crow",
+      "midi",
+      "grid"
+    ]
+  }
+}

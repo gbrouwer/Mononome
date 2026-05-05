@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:25:20.270040817Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/markwheeler/passersby",
+  "catalog_entry": {
+    "project_name": "passersby",
+    "project_url": "https://github.com/markwheeler/passersby",
+    "author": "markeats",
+    "description": "west coast style mono synth",
+    "discussion_url": "https://llllllll.co/t/passersby/21089",
+    "tags": [
+      "synth",
+      "midi",
+      "grid"
+    ]
+  }
+}

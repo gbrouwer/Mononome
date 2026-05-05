@@ -1,0 +1,27 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-07T22:35:57.620321264Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/northern-information/arcologies",
+  "catalog_entry": {
+    "project_name": "arcologies",
+    "project_url": "https://github.com/northern-information/arcologies",
+    "author": "tyleretters",
+    "description": "an interactive environment for designing 2d sound arcologies with norns and grid",
+    "discussion_url": "https://l.llllllll.co/arcologies",
+    "documentation_url": "https://norns.community/arcologies",
+    "tags": [
+      "generative",
+      "sampler",
+      "sequencer",
+      "jf",
+      "grid",
+      "midi",
+      "arc",
+      "crow"
+    ]
+  }
+}

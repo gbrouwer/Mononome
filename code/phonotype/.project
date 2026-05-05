@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-12T00:21:08.800748168Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/sixolet/phonotype",
+  "catalog_entry": {
+    "project_name": "phonotype",
+    "project_url": "https://github.com/sixolet/phonotype",
+    "author": "sixolet",
+    "description": "livecoding environment",
+    "discussion_url": "https://llllllll.co/t/49564",
+    "documentation_url": "https://norns.community/authors/sixolet/phonotype",
+    "tags": [
+      "generative",
+      "keyboard",
+      "midi"
+    ]
+  }
+}

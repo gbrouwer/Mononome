@@ -1,0 +1,13 @@
+[{
+  "params": [],
+  "type": "midi",
+  "unique": true,
+  
+  "polyphonic": false,
+  "value": 14,
+  "default_midi_device": 1,
+  "default_midi_channel": 10,
+  "name": "DRM HH 2",
+  "id": "drm-hh2",
+  "fixed_note": 49
+}]

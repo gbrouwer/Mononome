@@ -1,0 +1,24 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:46:46.352032113Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/dansimco/meadowphysics",
+  "catalog_entry": {
+    "project_name": "meadowphysics",
+    "project_url": "https://github.com/dansimco/meadowphysics",
+    "author": "alphacactus dansimco tehn",
+    "description": "grid-enabled rhizomatic cascading counter",
+    "discussion_url": "https://llllllll.co/t/21185",
+    "tags": [
+      "sequencer",
+      "synth",
+      "drum",
+      "grid",
+      "crow",
+      "jf"
+    ]
+  }
+}

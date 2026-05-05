@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:17:23.767769111Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome-community/nc03-ds",
+  "catalog_entry": {
+    "project_name": "nc03-ds",
+    "project_url": "https://github.com/monome-community/nc03-ds",
+    "author": "norns-community",
+    "description": "norns/circle/03 dressed in sequins",
+    "discussion_url": "https://llllllll.co/t/norns-circle-03-dressed-in-sequins/57649",
+    "tags": [
+      "art"
+    ]
+  }
+}

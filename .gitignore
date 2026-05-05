@@ -1,0 +1,35 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.tmp
+
+# Local environment and secrets
+.env
+*.env
+*.local
+
+# Logs and transient output
+*.log
+.cache/
+tmp/
+temp/
+build/
+dist/
+**/.git/
+
+# Keep the shared VS Code sync config tracked, but ignore other local editor state.
+.vscode/*
+!.vscode/extensions.json
+!.vscode/sftp.json
+
+# Norns runtime/audio artifacts. Put required source assets back explicitly if needed.
+dust/
+audio/
+*.wav
+*.aif
+*.aiff
+*.flac
+*.mp3
+*.so

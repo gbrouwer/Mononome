@@ -1,0 +1,16 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:16:45.251631443Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/itsyourbedtime/takt",
+  "catalog_entry": {
+    "project_name": "takt",
+    "project_url": "https://github.com/itsyourbedtime/takt",
+    "author": "its_your_bedtime",
+    "description": "parameter locking step sequencer",
+    "discussion_url": "https://llllllll.co/t/takt/21032"
+  }
+}

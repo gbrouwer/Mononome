@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:20:56.579443485Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/TheTrackdriver/overtones",
+  "catalog_entry": {
+    "project_name": "overtones",
+    "project_url": "https://github.com/TheTrackdriver/overtones",
+    "author": "trackdriver",
+    "description": "a synth based on additive synthesis",
+    "discussion_url": "https://llllllll.co/t/overtones/72641",
+    "documentation_url": "https://github.com/TheTrackdriver/overtones",
+    "tags": [
+      "synth",
+      "additive",
+      "midi",
+      "grid"
+    ]
+  }
+}

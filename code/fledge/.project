@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T11:25:03.613395248Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome/fledge",
+  "catalog_entry": {
+    "project_name": "fledge",
+    "project_url": "https://github.com/monome/fledge",
+    "description": "crow firmware updater",
+    "discussion_url": "https://monome.org/docs/crow/update/",
+    "tags": [
+      "crow",
+      "utility"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:10:11.43699186Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/jaseknighter/parrot",
+  "catalog_entry": {
+    "project_name": "parrot",
+    "project_url": "https://github.com/jaseknighter/parrot",
+    "author": "jaseknighter",
+    "description": "cv recorder and player for norns+crow",
+    "discussion_url": "https://llllllll.co/t/53083",
+    "tags": [
+      "crow"
+    ]
+  }
+}

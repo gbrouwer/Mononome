@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:51:28.307416898Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/TuesdayNightMachines/nmMelodyMagic",
+  "catalog_entry": {
+    "project_name": "nmMelodyMagic",
+    "project_url": "https://github.com/TuesdayNightMachines/nmMelodyMagic",
+    "author": "NightMachines",
+    "description": "a port of ken stone's infinite melody and modulo magic cgs serge modules",
+    "discussion_url": "https://llllllll.co/t/nmmelodymagic/",
+    "tags": [
+      "sequencer",
+      "midi"
+    ]
+  }
+}

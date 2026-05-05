@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:18:04.31561217Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/mx.samples",
+  "catalog_entry": {
+    "project_name": "mx.samples",
+    "project_url": "https://github.com/schollz/mx.samples",
+    "author": "infinitedigits",
+    "description": "like mr.radar or mr.coffee but for samples",
+    "discussion_url": "https://llllllll.co/t/mx-samples/41400",
+    "tags": [
+      "synth",
+      "midi"
+    ]
+  }
+}

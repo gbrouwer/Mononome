@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:23:04.969576479Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/thirtythree",
+  "catalog_entry": {
+    "project_name": "thirtythree",
+    "project_url": "https://github.com/schollz/thirtythree",
+    "author": "infinitedigits",
+    "description": "sample + sequencer + splicer in the style of po-33",
+    "discussion_url": "https://llllllll.co/t/thirtythree/44702",
+    "tags": [
+      "sequencer",
+      "grid"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-12T00:21:51.340815055Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/tomwaters/spirals",
+  "catalog_entry": {
+    "project_name": "spirals",
+    "project_url": "https://github.com/tomwaters/spirals",
+    "author": "tomw",
+    "description": "sequencer",
+    "discussion_url": "https://llllllll.co/t/spirals/40678",
+    "documentation_url": "https://norns.community/authors/tomw/spirals",
+    "tags": [
+      "generative",
+      "sequencer",
+      "grid",
+      "midi"
+    ]
+  }
+}

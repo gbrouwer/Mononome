@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:14:43.952256574Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/antonhornquist/moln",
+  "catalog_entry": {
+    "project_name": "moln",
+    "project_url": "https://github.com/antonhornquist/moln",
+    "author": "jah",
+    "description": "polyphonic subtractive synthesizer",
+    "discussion_url": "https://llllllll.co/t/moln/21111",
+    "tags": [
+      "synth"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-03-31T19:42:53.741728237+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/lorenzos-drums",
+  "catalog_entry": {
+    "project_name": "lorenzos-drums",
+    "project_url": "https://github.com/schollz/lorenzos-drums",
+    "author": "infinitedigits",
+    "description": "an electroacoustic drumset and sequencer",
+    "discussion_url": "https://llllllll.co/t/lorenzos-drums/52549",
+    "tags": [
+      "sequencer",
+      "drum"
+    ]
+  }
+}

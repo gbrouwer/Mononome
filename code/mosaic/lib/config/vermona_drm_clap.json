@@ -1,0 +1,13 @@
+[{
+  "params": [],
+  "type": "midi",
+  "unique": true,
+  
+  "polyphonic": false,
+  "value": 15,
+  "default_midi_device": 1,
+  "default_midi_channel": 10,
+  "name": "DRM Clap",
+  "id": "drm-clap",
+  "fixed_note": 39
+}]

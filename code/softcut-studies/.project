@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T11:24:56.321379563Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome/softcut-studies",
+  "catalog_entry": {
+    "project_name": "softcut-studies",
+    "project_url": "https://github.com/monome/softcut-studies",
+    "description": "softcut examples",
+    "discussion_url": "https://monome.org/docs/norns/softcut",
+    "tags": [
+      "study",
+      "demo"
+    ]
+  }
+}

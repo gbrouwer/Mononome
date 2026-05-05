@@ -1,0 +1,12 @@
+[{
+  "params": [],
+  "type": "midi",
+  "unique": true,
+  "polyphonic": false,
+  "value": 8,
+  "default_midi_device": 1,
+  "default_midi_channel": 10,
+  "name": "DRM BD",
+  "id": "drm-bd",
+  "fixed_note": 36
+}]

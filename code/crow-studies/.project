@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T11:25:06.742549727Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/monome/crow-studies",
+  "catalog_entry": {
+    "project_name": "crow-studies",
+    "project_url": "https://github.com/monome/crow-studies",
+    "description": "crow examples",
+    "discussion_url": "https://monome.org/docs/crow/norns",
+    "tags": [
+      "study",
+      "demo"
+    ]
+  }
+}

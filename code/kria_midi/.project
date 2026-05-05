@@ -1,0 +1,16 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:50:29.944111324Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/junklight/kria_midi",
+  "catalog_entry": {
+    "project_name": "kria_midi",
+    "project_url": "https://github.com/junklight/kria_midi",
+    "author": "junklight",
+    "description": "port of kria from ansible",
+    "discussion_url": "https://llllllll.co/t/21255"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-03-31T19:43:27.32229037+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/distropolis/pixels",
+  "catalog_entry": {
+    "project_name": "pixels",
+    "project_url": "https://github.com/distropolis/pixels",
+    "author": "distropolis",
+    "description": "generative visual sequencer instrument",
+    "discussion_url": "https://llllllll.co/t/pixels/38762",
+    "tags": [
+      "sequencer",
+      "generative",
+      "synth",
+      "art",
+      "midi"
+    ]
+  }
+}

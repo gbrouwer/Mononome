@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:17:59.506892753Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/mx.synths",
+  "catalog_entry": {
+    "project_name": "mx.synths",
+    "project_url": "https://github.com/schollz/mx.synths",
+    "author": "infinitedigits",
+    "description": "like mr.radar or mr.coffee but for synths",
+    "discussion_url": "https://llllllll.co/t/mx-synths/49535",
+    "tags": [
+      "synth",
+      "midi"
+    ]
+  }
+}

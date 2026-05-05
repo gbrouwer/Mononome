@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-05T22:18:18.970606069Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/piwip",
+  "catalog_entry": {
+    "project_name": "piwip",
+    "project_url": "https://github.com/schollz/piwip",
+    "author": "infinitedigits",
+    "description": "a sampler that works in realtime",
+    "discussion_url": "https://llllllll.co/t/piwip/36642",
+    "tags": [
+      "looper",
+      "sampler"
+    ]
+  }
+}
