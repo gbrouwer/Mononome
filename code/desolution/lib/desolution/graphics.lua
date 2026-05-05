@@ -95,7 +95,9 @@ graphics.draw_landscape = function(current_world)
     if current_world == 4 then
       graphics.draw_warp_star(event)
     elseif current_world == 5 then
-      graphics.draw_falling_dot(event)
+      if event.seed < probs[5] then
+        graphics.draw_falling_dot(event)
+      end
     elseif event.seed < probs[current_world] then
       graphics.draw_world_item(current_world, event.x, event.y)
     end
@@ -184,11 +186,7 @@ end
 
 graphics.draw_falling_dot = function(event)
   screen.line_width(1)
-  if event.seed < probs[5] then
-    screen.level(graphics.visual_level(5,16))
-  else
-    screen.level(graphics.visual_level(5,6))
-  end
+  screen.level(graphics.visual_level(5,16))
 
   local x = graphics.screen_x(event.x)
   local y = graphics.screen_y(event.y)
