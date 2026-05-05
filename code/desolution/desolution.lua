@@ -18,7 +18,7 @@ sc = softcut -- typing shortcut
 world_count = 6
 world_tick_counts = {}
 world_scan_positions = {}
-grid_blink_rate = 8
+grid_blink_rate = 1
 grid_blink_phase = 0
 grid_blink_on = true
 
