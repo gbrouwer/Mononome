@@ -46,4 +46,14 @@ Pull or push one script folder/file:
 ```
 
 The VS Code SFTP config in `.vscode/sftp.json` points at the same remote folder.
-It is configured for SSH key auth so the norns password is not stored in Git.
+It is configured with the default norns login (`we` / `sleep`).
+
+## Clone Decipher
+
+Create a renamed copy of `decipher`:
+
+```powershell
+.\tools\clone-decipher.ps1 -Name desolution
+```
+
+The helper copies the full instrument folder, renames the main Lua file and internal library folder, and rewrites `decipher` references and sample paths to the new name.
