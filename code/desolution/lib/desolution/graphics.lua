@@ -1,7 +1,7 @@
 local graphics = {}
 
 graphics.visual_level = function(world, max_level)
-  local min_level = math.min(6,max_level)
+  local min_level = 0
   return math.floor(util.linlin(0,1,min_level,max_level,level[world]))
 end
 
