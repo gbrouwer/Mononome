@@ -18,6 +18,9 @@ sc = softcut -- typing shortcut
 world_count = 6
 world_tick_counts = {}
 world_scan_positions = {}
+grid_blink_rate = 8
+grid_blink_phase = 0
+grid_blink_on = true
 
 -- sound things
 current_world = 1
@@ -158,6 +161,8 @@ function init()
 end
 
 function tick(stage)
+  grid_blink_phase = (grid_blink_phase + (grid_blink_rate / 60.0)) % 1.0
+  grid_blink_on = grid_blink_phase < 0.5
   redraw(stage)
 end
 

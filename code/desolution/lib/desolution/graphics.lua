@@ -64,6 +64,10 @@ graphics.draw_rotated_square = function(x,y,size,cos_angle,sin_angle)
 end
 
 graphics.draw_grid_world = function()
+  if not grid_blink_on then
+    return
+  end
+
   local square_level = graphics.visual_level(1,16)
   if square_level <= 0 then
     return
