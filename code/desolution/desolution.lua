@@ -4,7 +4,7 @@
 -- Based on Ethereal
 --
 -- E1 volume
--- E2 brightness
+-- E2 filter / world shape
 -- E3 density
 -- K2 evolve
 -- K3 change worlds
@@ -16,8 +16,8 @@ sc = softcut -- typing shortcut
 
 -- graphics things
 world_count = 6
-horizon_height = 28
-world_stars = {}
+world_tick_counts = {}
+world_scan_positions = {}
 
 -- sound things
 current_world = 1
@@ -50,34 +50,61 @@ function init_all_events()
 end
 
 function init_world_events(world)
-  for step = 1,16 do
-    event = {}
+  events[world] = {}
+  world_tick_counts[world] = 0
+  world_scan_positions[world] = 1
 
-    if world == 4 then
-      event.x = utils.random_between(-96,96)
-      event.y = utils.random_between(-48,48)
-      event.z = utils.random_between(6,60)
-    elseif world == 5 then
-      event.x = utils.random_between(0,128)
-      event.y = utils.random_between(-64,64)
-      event.radius = utils.random_between(1,3)
-    elseif world == 6 then
-      event.x = utils.random_between(8,120)
-      event.y = utils.random_between(10,58)
-      event.phase = step / 16
-    else
-      event.x = (step-1) * 16
-      event.y = utils.random_between(horizon_height+5,64)
+  if world == 1 then
+    local square_size = 10
+    local index = 1
+    for y=-80,80,square_size do
+      for x=-80,80,square_size do
+        events[world][index] = {
+          x = x,
+          y = y,
+          size = square_size,
+          seed = math.random()
+        }
+        index = index + 1
+      end
+    end
+  else
+    local event_count = 16
+    if world == 3 then
+      event_count = 24
     end
 
-    event.seed = math.random()
-    events[world][step] = event
+    for step = 1,event_count do
+      local event = {}
+
+      if world == 2 then
+        event.phase = step / event_count
+      elseif world == 3 then
+        event.x = utils.random_between(0,128)
+        event.y = utils.random_between(0,64)
+        event.phase = step / event_count
+      elseif world == 4 then
+        event.x = utils.random_between(-96,96)
+        event.y = utils.random_between(-48,48)
+        event.z = utils.random_between(6,60)
+      elseif world == 5 then
+        event.x = utils.random_between(0,128)
+        event.y = utils.random_between(-64,64)
+        event.radius = utils.random_between(1,3)
+      elseif world == 6 then
+        event.x = utils.random_between(8,120)
+        event.y = utils.random_between(10,58)
+        event.phase = step / 16
+      end
+
+      event.seed = math.random()
+      events[world][step] = event
+    end
   end
 end
 
 function init()
   init_all_events()
-  graphics.init_all_stars()
   file1 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_sfx_2_Dsharpmin.wav"
   file2 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_pad_2_Dsharpmin.wav"
   file3 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_lead_2_Dsharpmin.wav"
@@ -110,7 +137,7 @@ function init()
     sc.post_filter_br(i,0)
     sc.post_filter_rq(i,0.6)
 
-    freq = util.linexp(0, 1, 60, 12000, brightnesses[i])
+    local freq = util.linexp(0, 1, 60, 12000, brightnesses[i])
     sc.post_filter_fc(i,freq)
 
     sc.loop_start(i,start_points[i])
@@ -143,37 +170,25 @@ function trigger_world(world)
 end
 
 function world_tick(world)
-  world_events = events[world]
+  world_tick_counts[world] = (world_tick_counts[world] or 0) + 1
+  local world_events = events[world]
   if world_events == nil then
     return
   end
 
-  for i = 1,#world_events do
-    e = world_events[i]
-    if world == 4 then
-      e.z = e.z - util.linlin(0,1,0.6,2.8,brightnesses[world])
-      if e.z < 1 then
-        e.x = utils.random_between(-96,96)
-        e.y = utils.random_between(-48,48)
-        e.z = utils.random_between(45,70)
-        e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
+  if world == 1 then
+    if world_tick_counts[world] % 8 == 0 then
+      local index = world_scan_positions[world] or 1
+      local e = world_events[index]
+      if e ~= nil and e.seed < probs[world] then
+        trigger_world(world)
       end
-    elseif world == 5 then
-      e.y = e.y + util.linlin(0,1,0.5,2.2,brightnesses[world])
-      if e.y > 64 then
-        e.x = utils.random_between(0,128)
-        e.y = utils.random_between(-40,0)
-        e.radius = utils.random_between(1,3)
-        e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
-      end
-    elseif world == 6 then
-      e.phase = e.phase + util.linlin(0,1,0.008,0.04,brightnesses[world])
+      world_scan_positions[world] = (index % #world_events) + 1
+    end
+  elseif world == 2 then
+    for i = 1,#world_events do
+      local e = world_events[i]
+      e.phase = e.phase + 0.015
       if e.phase > 1 then
         e.phase = e.phase - 1
         e.seed = math.random()
@@ -181,13 +196,54 @@ function world_tick(world)
           trigger_world(world)
         end
       end
-    else
-      e.x = e.x - util.linlin(horizon_height+5,64,0.5,1.5,e.y)
-      if e.x < 0 then
-        e.x = 128
+    end
+  elseif world == 3 then
+    for i = 1,#world_events do
+      local e = world_events[i]
+      e.phase = e.phase + util.linlin(0,1,0.008,0.045,brightnesses[world])
+      if e.phase > 1 then
+        e.x = utils.random_between(0,128)
+        e.y = utils.random_between(0,64)
+        e.phase = e.phase - 1
         e.seed = math.random()
         if e.seed < probs[world] then
           trigger_world(world)
+        end
+      end
+    end
+  else
+    for i = 1,#world_events do
+      local e = world_events[i]
+      if world == 4 then
+        e.z = e.z - util.linlin(0,1,0.6,2.8,brightnesses[world])
+        if e.z < 1 then
+          e.x = utils.random_between(-96,96)
+          e.y = utils.random_between(-48,48)
+          e.z = utils.random_between(45,70)
+          e.seed = math.random()
+          if e.seed < probs[world] then
+            trigger_world(world)
+          end
+        end
+      elseif world == 5 then
+        e.y = e.y + util.linlin(0,1,0.5,2.2,brightnesses[world])
+        if e.y > 64 then
+          e.x = utils.random_between(0,128)
+          e.y = utils.random_between(-40,0)
+          e.radius = utils.random_between(1,3)
+          e.seed = math.random()
+          if e.seed < probs[world] then
+            trigger_world(world)
+          end
+        end
+      elseif world == 6 then
+        e.phase = e.phase + util.linlin(0,1,0.008,0.04,brightnesses[world])
+        if e.phase > 1 then
+          e.phase = e.phase - 1
+          e.seed = math.random()
+          if e.seed < probs[world] then
+            trigger_world(world)
+          end
         end
       end
     end
@@ -200,11 +256,11 @@ function enc(n,d)
     sc.level(current_world, level[current_world])
   elseif n==2 then
     brightnesses[current_world] = util.clamp(brightnesses[current_world] + d/100,0,1)
-    freq = util.linexp(0, 1, 60, 6000, brightnesses[current_world])
+    local freq = util.linexp(0, 1, 60, 6000, brightnesses[current_world])
     sc.post_filter_fc(current_world,freq)
   elseif n==3 then
     -- adjust world probablity
-    prob = probs[current_world] + d/100.0
+    local prob = probs[current_world] + d/100.0
     probs[current_world] = util.clamp(prob,0,0.9)
   end
 end
@@ -235,11 +291,6 @@ function redraw(stage)
   screen.level(16)
   screen.move(0,5)
   screen.aa(1)
-  if current_world <= 3 then
-    graphics.draw_stars()
-    graphics.draw_sun(current_world)
-    graphics.draw_horizon(current_world)
-  end
   graphics.draw_landscape(current_world)
   screen.level(16)
   screen.move(0,5)

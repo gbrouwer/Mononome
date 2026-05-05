@@ -1,4 +1,7 @@
 local graphics = {}
+local tau = math.pi * 2
+local center_x = 64
+local center_y = 32
 
 graphics.visual_level = function(world, max_level)
   local min_level = 0
@@ -13,79 +16,17 @@ graphics.screen_y = function(y)
   return util.clamp(math.floor(y),0,63)
 end
 
-graphics.draw_horizon = function(world)
-  local horizon_colors = {3,2,1,1,1,1}
-  screen.line_width(1)
-  screen.move(0,horizon_height)
-  screen.line_rel(128,0)
-  screen.close()
-  screen.stroke()
-  screen.rect(0,horizon_height,128,44)
-  screen.level(horizon_colors[world])
-  screen.fill()
-end
-
-graphics.draw_stars = function()
-  screen.line_width(1)
-  screen.level(math.floor(16.0 * level[current_world]))
-  for i = 1,#world_stars[current_world] do
-    star = world_stars[current_world][i]
-    screen.pixel(star.x,star.y)
-    screen.fill()
-  end
-end
-
-graphics.draw_sun = function(current_world)
-  _x = math.floor(128 - (64*brightnesses[current_world]))
-  _y = math.floor((horizon_height-20) + (16.0-(16*brightnesses[current_world])))
-  screen.move(_x,_y)
-  
-  if current_world == 1 then
-    -- sun
-    screen.circle(_x, _y, 10)
-    screen.level(math.floor(16.0 * brightnesses[current_world]))
-    screen.fill()
-  elseif current_world == 2 then
-    _x = _x + 16
-    _y = _y + 8
-    -- rings
-    screen.move(_x-12, _y)
-    screen.level(16)
-    screen.curve_rel(-8,4,0,16,24,0)
-    screen.stroke()
-    -- planet
-    screen.circle(_x, _y, 10)
-    screen.level(math.floor(16.0 * brightnesses[current_world] / 2))
-    screen.fill()
-    screen.level(16)
-    screen.move(_x+12, _y)
-    screen.curve_rel(8,-4,0,-16,-24,0)
-    screen.stroke()
-    -- moons
-    _x = _x -24
-    _y = _y -4
-    screen.circle(_x, _y, 2)
-    screen.level(math.floor(16.0 * brightnesses[current_world]))
-    screen.fill()
-    _x = _x -30
-    _y = _y + 4
-    screen.circle(_x, _y, 3)
-    screen.level(math.floor(16.0 * brightnesses[current_world]))
-    screen.fill()
-  elseif current_world == 3 then
-    -- moon
-    _x = _x + 12
-    screen.circle(_x, _y, 10)
-    screen.level(math.floor(16.0 * brightnesses[current_world]))
-    screen.fill()
-    screen.circle(_x-4, _y-4, 10)
-    screen.level(0)
-    screen.fill()
-  end
-end
-
 graphics.draw_landscape = function(current_world)
-  if current_world == 6 then
+  if current_world == 1 then
+    graphics.draw_grid_world()
+    return
+  elseif current_world == 2 then
+    graphics.draw_sine_world()
+    return
+  elseif current_world == 3 then
+    graphics.draw_ripple_world()
+    return
+  elseif current_world == 6 then
     graphics.draw_graph_world()
     return
   end
@@ -98,65 +39,87 @@ graphics.draw_landscape = function(current_world)
       if event.seed < probs[5] then
         graphics.draw_falling_dot(event)
       end
-    elseif event.seed < probs[current_world] then
-      graphics.draw_world_item(current_world, event.x, event.y)
     end
   end
 end
 
-graphics.draw_world_item = function(world,x,y)
-  if world == 1 then
-    graphics.draw_pole(x,y)
-  elseif world == 2 then
-    graphics.draw_pyramid(x,y)
-  elseif world == 3 then
-    graphics.draw_cactus(x,y)
+graphics.rotated_screen_point = function(x,y,cos_angle,sin_angle)
+  return center_x + (x * cos_angle) - (y * sin_angle),
+    center_y + (x * sin_angle) + (y * cos_angle)
+end
+
+graphics.draw_rotated_square = function(x,y,size,cos_angle,sin_angle)
+  local half_size = size * 0.42
+  local x1,y1 = graphics.rotated_screen_point(x - half_size,y - half_size,cos_angle,sin_angle)
+  local x2,y2 = graphics.rotated_screen_point(x + half_size,y - half_size,cos_angle,sin_angle)
+  local x3,y3 = graphics.rotated_screen_point(x + half_size,y + half_size,cos_angle,sin_angle)
+  local x4,y4 = graphics.rotated_screen_point(x - half_size,y + half_size,cos_angle,sin_angle)
+
+  screen.move(graphics.screen_x(x1),graphics.screen_y(y1))
+  screen.line_rel(graphics.screen_x(x2) - graphics.screen_x(x1),graphics.screen_y(y2) - graphics.screen_y(y1))
+  screen.line_rel(graphics.screen_x(x3) - graphics.screen_x(x2),graphics.screen_y(y3) - graphics.screen_y(y2))
+  screen.line_rel(graphics.screen_x(x4) - graphics.screen_x(x3),graphics.screen_y(y4) - graphics.screen_y(y3))
+  screen.close()
+  screen.fill()
+end
+
+graphics.draw_grid_world = function()
+  local square_level = graphics.visual_level(1,16)
+  if square_level <= 0 then
+    return
+  end
+
+  local angle = util.linlin(0,1,-0.75,0.75,brightnesses[1])
+  local cos_angle = math.cos(angle)
+  local sin_angle = math.sin(angle)
+
+  screen.line_width(1)
+  screen.level(square_level)
+  for i,event in pairs(events[1]) do
+    if event.seed < probs[1] then
+      graphics.draw_rotated_square(event.x,event.y,event.size,cos_angle,sin_angle)
+    end
   end
 end
-    
-graphics.draw_pole = function(x,y)
+
+graphics.draw_sine_world = function()
+  local amplitude = util.linlin(0,1,0,29,level[2])
+  local cycles = util.linlin(0,0.9,0.5,8,probs[2])
+  local phase = util.linlin(0,1,0,tau,brightnesses[2])
+  local last_x = 0
+  local last_y = graphics.screen_y(center_y + (math.sin(phase) * amplitude))
+
   screen.line_width(1)
-  pole_height = 12 
-  screen.move(x,y)
   screen.level(16)
-  screen.line_rel(0,0-pole_height)
-  screen.line_rel(-4,2)
-  screen.line_rel(4,-2)
-  screen.line_rel(4,-2)
+  screen.move(last_x,last_y)
+  for x=1,127 do
+    local t = x / 127
+    local y = graphics.screen_y(center_y + (math.sin((t * tau * cycles) + phase) * amplitude))
+    screen.line_rel(x - last_x,y - last_y)
+    last_x = x
+    last_y = y
+  end
   screen.stroke()
 end
 
-graphics.draw_pyramid = function(x,y)
-  screen.line_width(1)
-  pwidth = 12 
-  pheight = 8 
-  screen.move(x,y)
-  screen.level(16)
-  screen.line_rel(-pwidth/2, 0)
-  screen.line_rel(pwidth, 0)
-  screen.line_rel(-pwidth/2, 0-pheight)
-  screen.line_rel(-pwidth/2, pheight)
-  screen.line_rel(pwidth,0)
-  screen.line_rel(2,-4)
-  screen.line_rel(-2-(pwidth/2),4-pheight)
-  screen.stroke()
-end
+graphics.draw_ripple_world = function()
+  local ripple_level = graphics.visual_level(3,16)
+  if ripple_level <= 0 then
+    return
+  end
 
-graphics.draw_cactus = function(x,y)
-  cactus_height =12 
-  screen.line_width(3)
-  screen.line_cap("round")
-  screen.level(11) 
-  screen.move(x,y)
-  screen.line_rel(0,-cactus_height)
-  screen.line_rel(0,math.floor(cactus_height/3))
-  screen.line_rel(4,-1)
-  screen.line_rel(0,-6)
-  screen.line_rel(0,6)
-  screen.line_rel(-4,1)
-  screen.line_rel(-4,1)
-  screen.line_rel(0,-8)
-  screen.stroke()
+  local max_radius = util.linlin(0,1,10,34,brightnesses[3])
+
+  screen.line_width(1)
+  for i,event in pairs(events[3]) do
+    if event.seed < probs[3] then
+      local radius = 2 + (event.phase * max_radius)
+      local fade = util.clamp(1 - (event.phase * 0.75),0,1)
+      screen.level(math.floor(ripple_level * fade))
+      screen.circle(graphics.screen_x(event.x),graphics.screen_y(event.y),radius)
+      screen.stroke()
+    end
+  end
 end
 
 graphics.draw_warp_star = function(event)
@@ -235,23 +198,6 @@ graphics.draw_graph_world = function()
       screen.circle(x,y,math.floor(4 + (event.phase * 18)))
       screen.stroke()
     end
-  end
-end
-
-graphics.init_all_stars = function()
--- initialize events
-  for world=1,world_count do
-    world_stars[world] = {}
-    graphics.init_stars(world)
-  end
-end
-
-graphics.init_stars = function(world)
-  for i=1,10 do
-    star = {}
-    star.x = math.floor(math.random() * 128)
-    star.y = math.floor(math.random() * horizon_height)
-    world_stars[world][i] = star
   end
 end
 
