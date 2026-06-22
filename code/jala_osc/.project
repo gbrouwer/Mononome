@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-02-09T09:50:48.346666239Z",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/ulf/jala",
+  "catalog_entry": {
+    "project_name": "jala_osc",
+    "project_url": "https://github.com/ulf/jala",
+    "author": "ulfster / local OSC bridge adaptation",
+    "description": "ambient random sequencer with OSC MIDI bridge output",
+    "discussion_url": "https://llllllll.co/t/jala/41788",
+    "tags": [
+      "sequencer",
+      "midi"
+    ]
+  }
+}
