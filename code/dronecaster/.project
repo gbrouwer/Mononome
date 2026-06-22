@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:04:58.683829965+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/northern-information/dronecaster",
+  "catalog_entry": {
+    "project_name": "dronecaster",
+    "project_url": "https://github.com/northern-information/dronecaster",
+    "author": "tyleretters license",
+    "description": "cast drones \u0026 record whatever returns",
+    "discussion_url": "https://l.llllllll.co/dronecaster",
+    "documentation_url": "https://norns.community/dronecaster",
+    "tags": [
+      "synth",
+      "drone",
+      "generative"
+    ]
+  }
+}

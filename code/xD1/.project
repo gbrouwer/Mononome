@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:12:38.207901869+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/ryleelyman/xD1",
+  "catalog_entry": {
+    "project_name": "xD1",
+    "project_url": "https://github.com/ryleelyman/xD1",
+    "author": "alanza",
+    "description": "xD1 is an FM synth",
+    "discussion_url": "https://llllllll.co/t/xd1-is-an-fm-synth/59150",
+    "documentation_url": "https://norns.community/authors/alanza/xd1",
+    "tags": [
+      "synth",
+      "midi"
+    ]
+  }
+}

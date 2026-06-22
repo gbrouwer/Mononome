@@ -1,0 +1,168 @@
+local Installer = {
+    PLUGIN = {
+        BASE_URL = 'https://github.com/midouest/bytebeat/releases/download/',
+        VERSION = '0.1.0',
+        NAME = 'ByteBeat',
+        ASSET_EXT = '.tar.gz'
+    },
+    STAGING_DIR = '/tmp/',
+    INSTALL_DIR = '/home/we/.local/share/SuperCollider/Extensions/'
+}
+
+local State = {
+    NOT_INSTALLED = 0,
+    DOWNLOADING = 1,
+    INSTALLING = 2,
+    SHUTTING_DOWN = 3,
+    INSTALLED = 4
+}
+
+local state = State.NOT_INSTALLED
+
+local function get_asset_filename()
+    return Installer.PLUGIN.NAME .. Installer.PLUGIN.ASSET_EXT
+end
+
+local function get_staging_asset_path()
+    local asset = get_asset_filename()
+    return Installer.STAGING_DIR .. asset
+end
+
+local function get_cleanup_staging_asset_cmd()
+    local staging_asset = get_staging_asset_path()
+    return 'rm ' .. staging_asset
+end
+
+
+local function get_cleanup_staging_dir_cmd()
+    local staging_dir = Installer.STAGING_DIR .. '/' .. Installer.PLUGIN.NAME
+    return 'rm -rf ' .. staging_dir
+end
+
+local function cleanup_staging()
+    os.execute(get_cleanup_staging_asset_cmd())
+    os.execute(get_cleanup_staging_dir_cmd())
+end
+
+local function get_url()
+    local asset = get_asset_filename()
+    return Installer.PLUGIN.BASE_URL .. Installer.PLUGIN.VERSION .. '/' .. asset
+end
+
+local function get_download_cmd(url)
+    return 'wget -q -P ' .. Installer.STAGING_DIR .. ' ' .. url
+end
+
+local function download_plugin(callback)
+    cleanup_staging()
+    local url = get_url()
+    local cmd = get_download_cmd(url)
+    norns.system_cmd(cmd, callback)
+end
+
+local function get_decompress_cmd()
+    local staging_asset = get_staging_asset_path()
+    return 'tar -xf ' .. staging_asset .. ' -C ' .. Installer.STAGING_DIR
+end
+
+local function get_install_cmd()
+    local staging_dir = Installer.STAGING_DIR .. '/' .. Installer.PLUGIN.NAME
+    return 'cp -R ' .. staging_dir .. ' ' .. Installer.INSTALL_DIR
+end
+
+local function get_uninstall_cmd()
+    return 'rm -rf ' .. Installer.INSTALL_DIR .. '/' .. Installer.PLUGIN.NAME
+end
+
+local function install_plugin()
+    os.execute(get_decompress_cmd())
+    os.execute(get_install_cmd())
+end
+
+local function file_exists(path)
+    local f = io.open(path)
+    if f == nil then
+        return false
+    end
+    f:close()
+    return true
+end
+
+local function get_manifest(base_dir)
+    base_dir = base_dir or Installer.INSTALL_DIR
+    local name = Installer.PLUGIN.NAME
+    local plugin_base = base_dir .. name .. '/' .. name .. '/'
+    local class_base = plugin_base .. 'Classes/'
+
+    local plug = plugin_base .. 'ByteBeat_scsynth.so'
+    local ugen = class_base .. 'ByteBeat.sc'
+    local ctrl = class_base .. 'ByteBeatController.sc'
+
+    return { plug, ugen, ctrl }
+end
+
+local function check_manifest(manifest)
+    for _, path in ipairs(manifest) do
+        if not file_exists(path) then
+            return false, path
+        end
+    end
+    return true, nil
+end
+
+function Installer.init()
+    local manifest = get_manifest()
+    local installed, _ = check_manifest(manifest)
+    state = installed and State.INSTALLED or State.NOT_INSTALLED
+end
+
+function Installer.is_installed()
+    return state == State.INSTALLED
+end
+
+function Installer.can_install()
+    return wifi.ip ~= ""
+end
+
+function Installer.is_working()
+    return state ~= State.NOT_INSTALLED and state ~= State.INSTALLED
+end
+
+function Installer.install(options)
+    state = State.DOWNLOADING
+    download_plugin(
+        function()
+            local downloaded = file_exists(get_staging_asset_path())
+            if not downloaded then
+                if options.on_failed then
+                    options.on_failed('download')
+                end
+                state = State.NOT_INSTALLED
+                return
+            elseif options.on_downloaded then
+                options.on_downloaded()
+            end
+            state = State.INSTALLING
+            install_plugin()
+            local installed, _ = check_manifest(get_manifest())
+            if not installed then
+                if options.on_failed then
+                    options.on_failed('install')
+                end
+                state = State.NOT_INSTALLED
+                return
+            elseif options.on_installed then
+                options.on_installed()
+            end
+            state = State.SHUTTING_DOWN
+        end
+    )
+end
+
+function Installer.uninstall()
+    print("Uninstalling...")
+    os.execute(get_uninstall_cmd())
+    print("Uninstalled. Please reboot.")
+end
+
+return Installer

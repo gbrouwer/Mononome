@@ -1,4 +1,4 @@
--- Ethereal
+-- Ethereal transport
 -- Gijs Joost Brouwer
 --
 -- Based on NC01-Drone/Planetary
@@ -13,6 +13,9 @@ local utils = include('lib/ethereal/utils')
 local graphics = include('lib/ethereal/graphics')
 
 sc = softcut -- typing shortcut
+
+-- Link / transport state. Starts stopped; Ableton Link start will enable playback.
+running = false
 
 -- graphics things
 world_count = 6
@@ -75,6 +78,41 @@ function init_world_events(world)
   end
 end
 
+
+function stop_all_worlds()
+  for i=1,world_count do
+    sc.play(i,0)
+  end
+end
+
+function reset_transport()
+  for i=1,world_count do
+    sc.position(i, loop_points[i])
+  end
+end
+
+function start_transport()
+  reset_transport()
+  running = true
+end
+
+function stop_transport()
+  running = false
+  stop_all_worlds()
+end
+
+function clock.transport.start()
+  start_transport()
+end
+
+function clock.transport.stop()
+  stop_transport()
+end
+
+function clock.transport.reset()
+  reset_transport()
+end
+
 function init()
   init_all_events()
   graphics.init_all_stars()
@@ -119,6 +157,8 @@ function init()
 
   end
 
+  stop_transport()
+
   animation_clock = metro.init(tick, (1.0/60), -1)
   animation_clock:start()
 
@@ -135,6 +175,9 @@ function tick(stage)
 end
 
 function trigger_world(world)
+  if not running then
+    return
+  end
   if events[world] == nil then
     return
   end
@@ -143,6 +186,9 @@ function trigger_world(world)
 end
 
 function world_tick(world)
+  if not running then
+    return
+  end
   world_events = events[world]
   if world_events == nil then
     return
@@ -244,5 +290,11 @@ function redraw(stage)
   screen.level(16)
   screen.move(0,5)
   screen.text(current_world)
+  screen.move(100,5)
+  screen.text(running and "RUN" or "STOP")
   screen.update()
+end
+
+function cleanup()
+  stop_transport()
 end

@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:04:41.152173278+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/Quixotic7/corners",
+  "catalog_entry": {
+    "project_name": "corners",
+    "project_url": "https://github.com/Quixotic7/corners",
+    "author": "Quixotic7",
+    "description": "a grid controlled physics instrument. ported from tehn's m4l script",
+    "discussion_url": "https://llllllll.co/t/46227",
+    "documentation_url": "https://norns.community/authors/quixotic7/corners",
+    "tags": [
+      "synth",
+      "generative",
+      "grid",
+      "midi"
+    ]
+  }
+}

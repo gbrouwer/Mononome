@@ -1,0 +1,6 @@
+[submodule "routines"]
+	path = routines
+	url = https://github.com/andr-ew/nest-routines
+[submodule "util/pattern-tools"]
+	path = util/pattern-tools
+	url = https://github.com/andr-ew/pattern-tools

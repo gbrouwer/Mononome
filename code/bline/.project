@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:03:03.64089428+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/toneburst/bline",
+  "catalog_entry": {
+    "project_name": "bline",
+    "project_url": "https://github.com/toneburst/bline",
+    "author": "toneburst",
+    "description": "Bline is a parametric acid-style bassline explorer.",
+    "discussion_url": "https://llllllll.co/t/bline",
+    "documentation_url": "https://github.com/toneburst/bline/wiki",
+    "tags": [
+      "sequencer",
+      "generative",
+      "synth",
+      "midi"
+    ]
+  }
+}

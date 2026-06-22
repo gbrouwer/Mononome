@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:11:33.598858447+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/nvillar/tetra",
+  "catalog_entry": {
+    "project_name": "tetra",
+    "project_url": "https://github.com/nvillar/tetra",
+    "author": "nvillar",
+    "description": "use the grid to create, perform and sequence sound objects",
+    "discussion_url": "https://llllllll.co/t/tetra/68343",
+    "tags": [
+      "synth",
+      "sequencer",
+      "grid"
+    ]
+  }
+}

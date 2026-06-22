@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:04:19.329344753+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/yams7457/colorwheel",
+  "catalog_entry": {
+    "project_name": "colorwheel",
+    "project_url": "https://github.com/yams7457/colorwheel",
+    "author": "yams",
+    "description": "harmonic performance sequencer",
+    "discussion_url": "https://llllllll.co/t/50231",
+    "tags": [
+      "sequencer",
+      "grid",
+      "midi"
+    ]
+  }
+}

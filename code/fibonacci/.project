@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:05:14.781213721+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/bryceadams/fibonacci",
+  "catalog_entry": {
+    "project_name": "fibonacci",
+    "project_url": "https://github.com/bryceadams/fibonacci",
+    "author": "obi",
+    "description": "a sequencer that travels through numbers and time",
+    "discussion_url": "https://llllllll.co/t/fibonacci/54153",
+    "tags": [
+      "sequencer",
+      "generative",
+      "crow",
+      "midi"
+    ]
+  }
+}

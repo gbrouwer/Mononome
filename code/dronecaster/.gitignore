@@ -1,0 +1,21 @@
+.DS_Store
+._.DS_Store
+
+# Bitmap generation files and tools (development only)
+**/node_modules/
+**/package.json
+**/package-lock.json
+lib/scenes/mountain/generate_fog_bitmaps_final.js
+lib/scenes/mountain/*.py
+
+# Keep only the final generated bitmap assets
+!lib/scenes/mountain/assets/*.png
+
+Sketches/
+cairo_operators.htm
+norns_docs.htm
+clean-deploy.ps1
+deploy-to-norns.ps1
+DEPLOYMENT.md
+CHANGES_SUMMARY.md
+SCENE_SYSTEM.md

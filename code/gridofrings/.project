@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:06:50.64056615+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/smonthms/gridofrings",
+  "catalog_entry": {
+    "project_name": "gridofrings",
+    "project_url": "https://github.com/smonthms/gridofrings",
+    "author": "smonthms",
+    "description": "A Karper-esque take on Duncan Geere's gridofpoints",
+    "discussion_url": "https://llllllll.co/t/gridofrings/65138",
+    "documentation_url": "https://github.com/smonthms/gridofrings",
+    "tags": [
+      "grid",
+      "synth"
+    ]
+  }
+}

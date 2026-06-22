@@ -1,0 +1,5 @@
+._*
+.DS_Store
+.fuse*
+lib/config_.lua
+lib/dev.lua

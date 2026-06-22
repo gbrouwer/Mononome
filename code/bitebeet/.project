@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:02:52.177545815+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/midouest/bitebeet",
+  "catalog_entry": {
+    "project_name": "bitebeet",
+    "project_url": "https://github.com/midouest/bitebeet",
+    "author": "midouest",
+    "description": "low-rez live coding",
+    "discussion_url": "https://llllllll.co/t/bitebeet/",
+    "documentation_url": "https://norns.community/authors/midouest/bitebeet",
+    "tags": [
+      "synth",
+      "keyboard"
+    ]
+  }
+}

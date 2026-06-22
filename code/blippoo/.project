@@ -1,0 +1,19 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:03:16.592474187+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/cfdrake/blippoo",
+  "catalog_entry": {
+    "project_name": "blippoo",
+    "project_url": "https://github.com/cfdrake/blippoo",
+    "author": "cfd90",
+    "description": "blippoo box clone",
+    "discussion_url": "https://llllllll.co/t/41107",
+    "tags": [
+      "synth"
+    ]
+  }
+}

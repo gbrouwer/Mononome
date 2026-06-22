@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:12:46.825447792+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/sarweiler/zellen",
+  "catalog_entry": {
+    "project_name": "zellen",
+    "project_url": "https://github.com/sarweiler/zellen",
+    "author": "sbaio",
+    "description": "game of life based sequencer",
+    "discussion_url": "https://llllllll.co/t/zellen/21107",
+    "tags": [
+      "sequencer",
+      "grid"
+    ]
+  }
+}

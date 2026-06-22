@@ -1,0 +1,23 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:03:28.591282032+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/schollz/bloom",
+  "catalog_entry": {
+    "project_name": "bloom",
+    "project_url": "https://github.com/schollz/bloom",
+    "author": "infinitedigits",
+    "description": "recreation of Eno and Chilvers' 'bloom' app",
+    "discussion_url": "https://llllllll.co/t/bloom/65627",
+    "documentation_url": "https://norns.community/bloom",
+    "tags": [
+      "generative",
+      "midi",
+      "grid",
+      "crow"
+    ]
+  }
+}

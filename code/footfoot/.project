@@ -1,0 +1,21 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:05:38.016218488+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/melocoi/footfoot",
+  "catalog_entry": {
+    "project_name": "footfoot",
+    "project_url": "https://github.com/melocoi/footfoot",
+    "author": "ululo",
+    "description": "my pal",
+    "discussion_url": "https://llllllll.co/t/foot-foot/73334",
+    "documentation_url": "https://github.com/melocoi/footfoot/blob/main/README.md",
+    "tags": [
+      "looper",
+      "generative"
+    ]
+  }
+}

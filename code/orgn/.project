@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:08:59.142512594+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/andr-ew/orgn",
+  "catalog_entry": {
+    "project_name": "orgn",
+    "project_url": "https://github.com/andr-ew/orgn",
+    "author": "andrew",
+    "description": " 3-operator FM synth + fx for norns ",
+    "discussion_url": "https://llllllll.co/t/orgn/",
+    "documentation_url": "https://norns.community/authors/andrew/orgn",
+    "tags": [
+      "audio_fx",
+      "synth",
+      "grid"
+    ]
+  }
+}

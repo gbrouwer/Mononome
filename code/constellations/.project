@@ -1,0 +1,22 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-06-20T12:04:32.101413073+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/timothy-taylor/constellations",
+  "catalog_entry": {
+    "project_name": "constellations",
+    "project_url": "https://github.com/timothy-taylor/constellations",
+    "author": "toomanatees",
+    "description": "scan the stars; make music! an interactive sequencer for Norns, Crow, JF, and midi.",
+    "discussion_url": "https://llllllll.co/t/constellations/52225",
+    "tags": [
+      "generative",
+      "sequencer",
+      "midi",
+      "crow"
+    ]
+  }
+}
