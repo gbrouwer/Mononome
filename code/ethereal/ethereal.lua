@@ -4,8 +4,9 @@
 -- Based on NC01-Drone/Planetary
 --
 -- E1 volume
--- E2 brightness
+-- E2 division
 -- E3 density
+-- K1 start/stop
 -- K2 evolve
 -- K3 change worlds
 
@@ -42,8 +43,42 @@ loop_ranges = {
   {333,356}
 }
 world_clock_rates = {(1.0/40),(1.0/30),(1.0/20),(1.0/50),(1.0/35),(1.0/24)}
+division_names = {
+  "1/32","1/16T","1/16","1/8T","1/8","1/4T","3/16","1/4",
+  "1/2T","3/8","1/2","5/8","3/4","7/8","1 bar","5/4",
+  "3/2","7/4","2 bars","3 bars","4 bars","8 bars"
+}
+division_values = {
+  1/8,1/6,1/4,1/3,1/2,2/3,3/4,1,
+  4/3,3/2,2,5/2,3,7/2,4,5,
+  6,7,8,12,16,32
+}
+division_defaults = {8,5,3,8,11,5}
 
 events = {} -- ie, things in the landscape.
+pending_triggers = {}
+
+function add_params()
+  params:add_separator("ethereal_timing", "ethereal timing")
+  for world=1,world_count do
+    params:add_option(
+      "world_"..world.."_division",
+      "world "..world.." div",
+      division_names,
+      division_defaults[world]
+    )
+  end
+end
+
+function get_world_division(world)
+  local index = params:get("world_"..world.."_division")
+  return division_values[index] or division_values[division_defaults[world]]
+end
+
+function get_world_division_name(world)
+  local index = params:get("world_"..world.."_division")
+  return division_names[index] or division_names[division_defaults[world]]
+end
 
 function init_all_events()
   for world=1,world_count do
@@ -85,10 +120,17 @@ function stop_all_worlds()
   end
 end
 
+function clear_pending_triggers()
+  for i=1,world_count do
+    pending_triggers[i] = false
+  end
+end
+
 function reset_transport()
   for i=1,world_count do
     sc.position(i, loop_points[i])
   end
+  clear_pending_triggers()
 end
 
 function start_transport()
@@ -99,6 +141,15 @@ end
 function stop_transport()
   running = false
   stop_all_worlds()
+  clear_pending_triggers()
+end
+
+function toggle_transport()
+  if running then
+    stop_transport()
+  else
+    start_transport()
+  end
 end
 
 function clock.transport.start()
@@ -113,7 +164,20 @@ function clock.transport.reset()
   reset_transport()
 end
 
+function world_trigger_clock(world)
+  while true do
+    clock.sync(get_world_division(world))
+    if running and pending_triggers[world] then
+      pending_triggers[world] = false
+      trigger_world(world)
+    elseif not running then
+      pending_triggers[world] = false
+    end
+  end
+end
+
 function init()
+  add_params()
   init_all_events()
   graphics.init_all_stars()
   file1 = _path.code .. "ethereal/lib/dd.wav"
@@ -168,6 +232,11 @@ function init()
     world_clocks[i] = metro.init(function() world_tick(world) end, world_clock_rates[i], -1)
     world_clocks[i]:start()
   end
+
+  world_trigger_clocks = {}
+  for i=1,world_count do
+    world_trigger_clocks[i] = clock.run(world_trigger_clock, i)
+  end
 end
 
 function tick(stage)
@@ -183,6 +252,12 @@ function trigger_world(world)
   end
   sc.position(world, loop_points[world])
   sc.play(world,1)
+end
+
+function maybe_trigger(world, e)
+  if e.seed < probs[world] then
+    pending_triggers[world] = true
+  end
 end
 
 function world_tick(world)
@@ -203,9 +278,7 @@ function world_tick(world)
         e.y = utils.random_between(-48,48)
         e.z = utils.random_between(45,70)
         e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
+        maybe_trigger(world, e)
       end
     elseif world == 5 then
       e.y = e.y + util.linlin(0,1,0.5,2.2,brightnesses[world])
@@ -214,27 +287,21 @@ function world_tick(world)
         e.y = utils.random_between(-40,0)
         e.radius = utils.random_between(1,3)
         e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
+        maybe_trigger(world, e)
       end
     elseif world == 6 then
       e.phase = e.phase + util.linlin(0,1,0.008,0.04,brightnesses[world])
       if e.phase > 1 then
         e.phase = e.phase - 1
         e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
+        maybe_trigger(world, e)
       end
     else
       e.x = e.x - util.linlin(horizon_height+5,64,0.5,1.5,e.y)
       if e.x < 0 then
         e.x = 128
         e.seed = math.random()
-        if e.seed < probs[world] then
-          trigger_world(world)
-        end
+        maybe_trigger(world, e)
       end
     end
   end
@@ -245,9 +312,7 @@ function enc(n,d)
     level[current_world] = util.clamp(level[current_world] + d/100,0,1)
     sc.level(current_world, level[current_world])
   elseif n==2 then
-    brightnesses[current_world] = util.clamp(brightnesses[current_world] + d/100,0,1)
-    freq = util.linexp(0, 1, 60, 6000, brightnesses[current_world])
-    sc.post_filter_fc(current_world,freq)
+    params:delta("world_"..current_world.."_division", d)
   elseif n==3 then
     -- adjust world probablity
     prob = probs[current_world] + d/100.0
@@ -256,7 +321,9 @@ function enc(n,d)
 end
 
 function key(n,z)
-  if n==3 and z==1 then
+  if n==1 and z==1 then
+    toggle_transport()
+  elseif n==3 and z==1 then
     current_world = current_world % world_count + 1
   elseif n==2 and z==1 then
     init_world_events(current_world)
@@ -292,9 +359,25 @@ function redraw(stage)
   screen.text(current_world)
   screen.move(100,5)
   screen.text(running and "RUN" or "STOP")
+  screen.level(10)
+  screen.move(0,62)
+  screen.text("div " .. get_world_division_name(current_world))
   screen.update()
 end
 
 function cleanup()
   stop_transport()
+  if animation_clock ~= nil then
+    animation_clock:stop()
+  end
+  if world_clocks ~= nil then
+    for i=1,#world_clocks do
+      world_clocks[i]:stop()
+    end
+  end
+  if world_trigger_clocks ~= nil then
+    for i=1,#world_trigger_clocks do
+      clock.cancel(world_trigger_clocks[i])
+    end
+  end
 end

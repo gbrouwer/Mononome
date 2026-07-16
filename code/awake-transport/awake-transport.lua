@@ -28,7 +28,8 @@
 -- E2/E3 changes
 --
 -- OPTION
--- *toggle
+-- K2 toggle transport
+-- K3 reset transport
 -- E2/E3 changes
 
 engine.name = 'PolyPerc'
@@ -483,8 +484,14 @@ function key(n,z)
       snd_sel = util.clamp(snd_sel + 2,1,NUM_SND_PARAMS-1)
     end
   elseif mode == 4 then --option
-    if n==2 then
-    elseif n==3 then
+    if n==2 and z==1 then
+      if running then
+        stop()
+      else
+        start()
+      end
+    elseif n==3 and z==1 then
+      reset()
     end
   end
 
@@ -565,6 +572,19 @@ function redraw()
     screen.level(15)
     screen.move(0,60)
     screen.text(alt==false and params:string("root_note") or params:string("scale_mode"))
+
+    screen.level(1)
+    screen.move(76,30)
+    screen.text("K2")
+    screen.level(15)
+    screen.move(94,30)
+    screen.text(running and "stop" or "start")
+    screen.level(1)
+    screen.move(76,42)
+    screen.text("K3")
+    screen.level(15)
+    screen.move(94,42)
+    screen.text("reset")
   end
 
 

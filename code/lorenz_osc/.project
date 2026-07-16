@@ -1,0 +1,26 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-03-31T19:42:49.149138876+01:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "https://github.com/Ericxgao/lorenz",
+  "catalog_entry": {
+    "project_name": "lorenz_osc",
+    "project_url": "https://github.com/Ericxgao/lorenz",
+    "author": "oksami",
+    "description": "strange attractor OSC MIDI generator, based on lorenz",
+    "discussion_url": "https://llllllll.co/t/71465",
+    "documentation_url": "https://github.com/Ericxgao/lorenz/blob/main/README.md",
+    "tags": [
+      "happyaccident",
+      "norns",
+      "utilities",
+      "utility",
+      "crow",
+      "osc",
+      "midi"
+    ]
+  }
+}

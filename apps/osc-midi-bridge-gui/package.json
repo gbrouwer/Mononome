@@ -1,0 +1,62 @@
+{
+  "name": "osc-midi-bridge-gui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Small Electron control panel for the norns OSC MIDI bridge.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "smoke": "electron . --smoke-test",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win portable",
+    "dist:installer": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^43.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "nl.gijs.norns.osc-midi-bridge",
+    "productName": "Norns OSC MIDI Bridge",
+    "artifactName": "NornsOSCBridge-${version}-${arch}.${ext}",
+    "asar": true,
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../../tools/osc-midi-bridge.ps1",
+        "to": "tools/osc-midi-bridge.ps1"
+      },
+      {
+        "from": "../../tools/send-osc-midi-test.ps1",
+        "to": "tools/send-osc-midi-test.ps1"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "portable": {
+      "artifactName": "NornsOSCBridge-${version}-portable.${ext}"
+    },
+    "nsis": {
+      "artifactName": "NornsOSCBridge-${version}-setup.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

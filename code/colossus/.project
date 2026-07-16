@@ -1,0 +1,20 @@
+{
+  "file_info": {
+    "version": 1,
+    "kind": "project_metadata"
+  },
+  "installed_on": "2026-07-16T22:21:09+02:00",
+  "updated_on": "0001-01-01T00:00:00Z",
+  "project_url": "",
+  "catalog_entry": {
+    "project_name": "colossus",
+    "project_url": "",
+    "author": "Gijs Joost Brouwer",
+    "description": "a wide, slowly evolving drone instrument for norns",
+    "tags": [
+      "synth",
+      "drone",
+      "generative"
+    ]
+  }
+}

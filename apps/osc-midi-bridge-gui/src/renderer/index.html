@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>norns OSC MIDI Bridge</title>
+    <link rel="icon" href="./assets/AppIcon.png">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="window-titlebar">
+      <div class="window-brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Norns OSC MIDI Bridge</span>
+      </div>
+      <div class="window-controls">
+        <button id="minimizeWindow" class="window-button" type="button" title="Minimize" aria-label="Minimize">-</button>
+        <button id="maximizeWindow" class="window-button" type="button" title="Maximize" aria-label="Maximize">&#9633;</button>
+        <button id="closeWindow" class="window-button close" type="button" title="Close" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>norns OSC MIDI Bridge</h1>
+          <p id="subtitle">UDP 7123 to Ableton via loopMIDI</p>
+        </div>
+        <div id="bridgePill" class="pill pill-idle">Stopped</div>
+      </header>
+
+      <section class="controls" aria-label="Bridge controls">
+        <label>
+          <span>MIDI out</span>
+          <select id="midiOut"></select>
+        </label>
+        <label class="port-field">
+          <span>OSC port</span>
+          <input id="listenPort" type="number" min="1" max="65535" value="7123">
+        </label>
+        <label class="check-field">
+          <input id="verbosePackets" type="checkbox" checked>
+          <span>Packet log</span>
+        </label>
+        <button id="refreshButton" class="secondary">Refresh</button>
+        <button id="startButton" class="primary">Start</button>
+        <button id="stopButton" class="secondary" disabled>Stop</button>
+      </section>
+
+      <section class="status-grid" aria-label="System status">
+        <div class="status-row">
+          <span class="dot" id="loopMidiDot"></span>
+          <span class="status-label">loopMIDI</span>
+          <span class="status-value" id="loopMidiStatus">Checking</span>
+        </div>
+        <div class="status-row">
+          <span class="dot" id="portDot"></span>
+          <span class="status-label">Virtual port</span>
+          <span class="status-value" id="portStatus">Checking</span>
+        </div>
+        <div class="status-row">
+          <span class="dot" id="udpDot"></span>
+          <span class="status-label">UDP port</span>
+          <span class="status-value" id="udpStatus">Checking</span>
+        </div>
+        <div class="status-row">
+          <span class="dot" id="abletonDot"></span>
+          <span class="status-label">Ableton</span>
+          <span class="status-value" id="abletonStatus">Checking</span>
+        </div>
+      </section>
+
+      <section class="details">
+        <div>
+          <h2>PC IPs</h2>
+          <div id="ipList" class="chips"></div>
+        </div>
+        <div class="test-strip">
+          <h2>Tools</h2>
+          <button id="testButton" class="secondary">Send C3</button>
+          <button id="resetLoopMidiButton" class="secondary">Reset loopMIDI</button>
+        </div>
+      </section>
+
+      <section id="recoveryBanner" class="recovery-banner hidden" aria-live="polite">
+        <div>
+          <h2>MIDI output needs reset</h2>
+          <p id="recoveryMessage">Reset loopMIDI, then start the bridge again.</p>
+        </div>
+        <button id="resetLoopMidiBannerButton" class="secondary">Reset loopMIDI</button>
+      </section>
+
+      <section class="log-panel" aria-label="Bridge log">
+        <div class="log-head">
+          <h2>Bridge Log</h2>
+          <button id="clearLogButton" class="text-button">Clear</button>
+        </div>
+        <pre id="logOutput"></pre>
+      </section>
+    </main>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

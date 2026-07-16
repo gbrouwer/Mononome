@@ -20,7 +20,31 @@ Pick the virtual MIDI output port index. If no virtual port exists yet, create o
 
 ## 2. Start The Bridge
 
-Use the selected index:
+For the small Electron control panel:
+
+```powershell
+cd .\apps\osc-midi-bridge-gui
+npm install
+npm start
+```
+
+The GUI lists MIDI outputs, checks for loopMIDI, checks UDP port `7123`, starts/stops the bridge, can send a test note, and can reset loopMIDI if Windows leaves the virtual MIDI output in a stale state.
+
+To build the portable Windows executable:
+
+```powershell
+cd .\apps\osc-midi-bridge-gui
+npm run dist
+```
+
+Then launch:
+
+```powershell
+.\dist\NornsOSCBridge-0.1.0-portable.exe
+```
+
+For the raw PowerShell bridge, use the selected index:
+
 
 ```powershell
 .\tools\osc-midi-bridge.ps1 -MidiOutIndex 1

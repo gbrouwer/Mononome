@@ -17,6 +17,7 @@ tmp/
 temp/
 build/
 dist/
+node_modules/
 **/.git/
 
 # Keep the shared VS Code sync config tracked, but ignore other local editor state.

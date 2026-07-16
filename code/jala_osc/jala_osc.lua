@@ -6,8 +6,7 @@
 --
 --   K1 - ALT
 --
---   K2 - toggle learning mode
---        (set MIDI in before, optional)
+--   K2 - start/stop
 --   K3 - press= Pause play
 --        release= play note
 --
@@ -23,6 +22,8 @@ MusicUtil = require "musicutil"
 
 options = {}
 options.OUTPUT = {"audio", "osc", "audio + osc"}
+options.OSC_TARGETS = {"Amma", "MakeMake"}
+options.OSC_TARGET_IPS = {"192.168.178.220", "192.168.178.231"}
 
 --options.OUTPUT = {"audio", "midi", "audio + midi", "mx"}
 --mxsamples=include("mx.samples/lib/mx.samples")
@@ -43,6 +44,7 @@ local msg = {}
 
 local learning = false
 local play = true
+local running = false
 local alt = false
 
 active_notes = {}
@@ -52,13 +54,14 @@ root = 48
 possible_scales = MusicUtil.SCALES
 scale_index = 1
 probs = {30,10,10,10,10,10,10,10}
-opt_item = 1
+opt_item = 3
 edit_note = 1
 
 
 opt_items = {
   {id = "output", label = "output", value = function() return options.OUTPUT[params:get("output")] end},
   {id = "clock_tempo", label = "bpm", value = function() return params:get("clock_tempo") end},
+  {id = "osc_target", label = "osc target", value = function() return options.OSC_TARGETS[params:get("osc_target")] end},
   {id = "osc_ip", label = "osc ip", value = function() return params:get("osc_ip") end},
   {id = "osc_port", label = "osc port", value = function() return params:get("osc_port") end},
   {id = "osc_channel", label = "channel", value = function() return params:get("osc_channel") end},
@@ -77,6 +80,12 @@ end
 
 function uses_osc()
   return params:get("output") == 2 or params:get("output") == 3
+end
+
+function set_osc_target(value)
+  if params.lookup["osc_ip"] ~= nil then
+    params:set("osc_ip", options.OSC_TARGET_IPS[value])
+  end
 end
 
 function osc_dest()
@@ -109,6 +118,42 @@ function all_notes_off()
     end
   end
   active_notes = {}
+end
+
+function reset_transport()
+  all_notes_off()
+end
+
+function start_transport()
+  reset_transport()
+  running = true
+  redraw()
+end
+
+function stop_transport()
+  running = false
+  all_notes_off()
+  redraw()
+end
+
+function toggle_transport()
+  if running then
+    stop_transport()
+  else
+    start_transport()
+  end
+end
+
+function clock.transport.start()
+  start_transport()
+end
+
+function clock.transport.stop()
+  stop_transport()
+end
+
+function clock.transport.reset()
+  reset_transport()
 end
 
 function actualStep()
@@ -168,7 +213,7 @@ function step()
       end
     end
 
-    if play then
+    if running and play then
 
       -- Trig Probablility
       if math.random(100) <= params:get("probability") then
@@ -186,9 +231,6 @@ end
 function init()
   engine.amp(0.5)
   engine.release(4)
-
-  get_midi_names()
-  print_midi_names()
 
   params:add_separator()
 
@@ -221,22 +263,19 @@ function init()
 
   params:add_separator("OSC MIDI")
 
+  params:add{type = "option", id = "osc_target", name = "OSC target",
+    options = options.OSC_TARGETS, default = 1,
+    action = function(value)
+      set_osc_target(value)
+    end}
   params:add_text("osc_ip", "PC IP", "192.168.178.220")
+  set_osc_target(params:get("osc_target"))
   params:add_number("osc_port", "OSC port", 1, 65535, 7123)
   params:add_number("osc_channel", "MIDI channel", 1, 16, 1)
   params:add{type = "trigger", id = "osc_test_note", name = "send OSC test note",
     action = function()
       osc_note(60, 110, 1)
     end}
-
-  params:add_separator("MIDI Learn")
-
-  params:add{type = "option", id = "midi_device", name = "MIDI input", options = mdevs , default = 1,
-    action = function(value)
-      connect_midi_input(value)
-    end}
-
-  connect_midi_input(devicepos)
 
   -- Render Style
   screen.level(15)
@@ -411,32 +450,16 @@ end
 
 function key(n, z)
   if n==2 and z == 1 then
-    if learning then
-      -- Now, set the scale to be played
-      if possible_scales[scale_index] ~= nil then
-        scale = table.copy(possible_scales[scale_index])
-        probs = create_probs(#scale.intervals)
-      else
-        scale = table.copy(MusicUtil.SCALES[1])
-        possible_scales = MusicUtil.SCALES
-        probs = create_probs(#scale.intervals)
-        root = 48
-      end
-      play = true
-      learning = false
-    else
-      notes = {}
-      possible_scales = {}
-      learning = true
-      connect_midi_input(devicepos)
-    end
+    toggle_transport()
   end
   if n == 3 and z == 1 then
     play = false
   end
   if n == 3 and z == 0 then
     play = true
-    actualStep()
+    if running then
+      actualStep()
+    end
   end
   if n == 1 and z == 1 then
     alt = true
@@ -515,6 +538,10 @@ function redraw()
   screen.text('bpm')
   screen.move(110,7)
   screen.text(tempo_disp)
+  screen.stroke()
+
+  screen.move(102,16)
+  screen.text(running and "RUN" or "STOP")
   screen.stroke()
 
   if learning then
@@ -613,6 +640,10 @@ function showOptions()
     screen.move(62, 60)
     screen.text(opt_items[opt_item].value())
   end
+
+function cleanup()
+  stop_transport()
+end
 
 --
 -- Utils

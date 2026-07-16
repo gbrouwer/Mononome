@@ -4,6 +4,7 @@ param(
     [int]$MidiOutIndex = -1,
     [string]$MidiOutName = "",
     [switch]$ListDevices,
+    [switch]$ListDevicesJson,
     [switch]$VerbosePackets
 )
 
@@ -211,6 +212,11 @@ function Send-ControlChange {
 
 if ($ListDevices) {
     Show-MidiOutDevices
+    exit 0
+}
+
+if ($ListDevicesJson) {
+    Get-MidiOutDevices | ConvertTo-Json -Compress
     exit 0
 }
 

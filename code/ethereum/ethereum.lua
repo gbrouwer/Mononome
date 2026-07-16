@@ -1,4 +1,4 @@
--- Desolution transport
+-- Ethereum transport
 -- Gijs Joost Brouwer
 --
 -- Based on Ethereal
@@ -10,8 +10,8 @@
 -- K2 evolve
 -- K3 change worlds
 
-local utils = include('lib/desolution/utils')
-local graphics = include('lib/desolution/graphics')
+local utils = include('lib/ethereum/utils')
+local graphics = include('lib/ethereum/graphics')
 
 sc = softcut -- typing shortcut
 
@@ -21,10 +21,8 @@ running = false
 -- graphics things
 world_count = 6
 world_tick_counts = {}
-world_scan_positions = {}
-grid_blink_rate = 1
-grid_blink_phase = 0
-grid_blink_on = true
+world_phase = 0
+tau = math.pi * 2
 
 -- sound things
 current_world = 1
@@ -38,11 +36,11 @@ start_points = {0,11,0,31,20,42}
 loop_points = {0,11,0,31,20,42}
 buffer_indexes = {1,1,2,1,2,1}
 loop_ranges = {
-  {0,6},
-  {11,26},
-  {0,15},
-  {31,37},
-  {20,32},
+  {0,4.5},
+  {11,15},
+  {0,4},
+  {31,35.5},
+  {20,24},
   {42,46.5}
 }
 world_clock_rates = {(1.0/40),(1.0/30),(1.0/20),(1.0/50),(1.0/35),(1.0/24)}
@@ -58,11 +56,11 @@ division_values = {
 }
 division_defaults = {8,5,3,8,11,5}
 
-events = {} -- ie, things in the landscape.
+events = {}
 pending_triggers = {}
 
 function add_params()
-  params:add_separator("desolution_timing", "desolution timing")
+  params:add_separator("ethereum_timing", "ethereum timing")
   for world=1,world_count do
     params:add_option(
       "world_"..world.."_division",
@@ -85,7 +83,6 @@ end
 
 function init_all_events()
   for world=1,world_count do
-    events[world] = {}
     init_world_events(world)
   end
 end
@@ -93,57 +90,173 @@ end
 function init_world_events(world)
   events[world] = {}
   world_tick_counts[world] = 0
-  world_scan_positions[world] = 1
 
   if world == 1 then
-    local square_size = 10
-    local index = 1
-    for y=-80,80,square_size do
-      for x=-80,80,square_size do
-        events[world][index] = {
-          x = x,
-          y = y,
-          size = square_size,
-          seed = math.random()
-        }
-        index = index + 1
-      end
+    -- Cathedral: receding vault frames and vertical light pillars.
+    for i=1,16 do
+      events[world][i] = {
+        phase = i / 16,
+        speed = utils.random_between(0.006,0.018),
+        side = (i % 2 == 0) and -1 or 1,
+        offset = utils.random_between(-18,18),
+        seed = math.random()
+      }
     end
-  else
-    local event_count = 16
-    if world == 3 then
-      event_count = 24
+  elseif world == 2 then
+    -- Mandala: rotational symmetry with petals that bloom and fold.
+    for i=1,24 do
+      events[world][i] = {
+        angle = (i / 24) * tau,
+        radius = utils.random_between(7,31),
+        spin = utils.random_between(-0.025,0.025),
+        phase = math.random(),
+        seed = math.random()
+      }
     end
-
-    for step = 1,event_count do
-      local event = {}
-
-      if world == 2 then
-        event.phase = step / event_count
-      elseif world == 3 then
-        event.x = utils.random_between(0,128)
-        event.y = utils.random_between(0,64)
-        event.phase = step / event_count
-      elseif world == 4 then
-        event.x = utils.random_between(-96,96)
-        event.y = utils.random_between(-48,48)
-        event.z = utils.random_between(6,60)
-      elseif world == 5 then
-        event.x = utils.random_between(0,128)
-        event.y = utils.random_between(-64,64)
-        event.radius = utils.random_between(1,3)
-      elseif world == 6 then
-        event.x = utils.random_between(8,120)
-        event.y = utils.random_between(10,58)
-        event.phase = step / 16
-      end
-
-      event.seed = math.random()
-      events[world][step] = event
+  elseif world == 3 then
+    -- Liquid light: contour bands and sparks over a slow moving field.
+    for i=1,12 do
+      events[world][i] = {
+        y = 8 + (i * 4.4),
+        phase = math.random(),
+        amp = utils.random_between(3,13),
+        freq = utils.random_between(1.0,4.0),
+        seed = math.random()
+      }
+    end
+  elseif world == 4 then
+    -- Light city: towers, windows, and a scanning stage beam.
+    local x = 0
+    local i = 1
+    while x < 128 do
+      local w = math.random(4,9)
+      events[world][i] = {
+        x = x,
+        w = w,
+        h = utils.random_between(10,54),
+        phase = math.random(),
+        seed = math.random()
+      }
+      x = x + w + math.random(1,3)
+      i = i + 1
+    end
+  elseif world == 5 then
+    -- Portal: nested spinning gates and streaks flying through them.
+    for i=1,20 do
+      events[world][i] = {
+        radius = utils.random_between(3,38),
+        angle = (i / 20) * tau,
+        spin = utils.random_between(-0.045,0.045),
+        sides = math.random(3,8),
+        phase = math.random(),
+        seed = math.random()
+      }
+    end
+  elseif world == 6 then
+    -- Swarm lattice: drifting agents that form temporary constellations.
+    for i=1,20 do
+      events[world][i] = {
+        x = utils.random_between(6,122),
+        y = utils.random_between(8,58),
+        vx = utils.random_between(-0.9,0.9),
+        vy = utils.random_between(-0.7,0.7),
+        phase = math.random(),
+        seed = math.random()
+      }
     end
   end
 end
 
+function reset_event(world, e)
+  if world == 1 then
+    e.phase = e.phase - 1
+    e.offset = utils.random_between(-18,18)
+    e.seed = math.random()
+  elseif world == 2 then
+    e.phase = e.phase - 1
+    e.radius = utils.random_between(7,31)
+    e.seed = math.random()
+  elseif world == 3 then
+    e.phase = e.phase - 1
+    e.amp = utils.random_between(3,13)
+    e.freq = utils.random_between(1.0,4.0)
+    e.seed = math.random()
+  elseif world == 4 then
+    e.phase = e.phase - 1
+    e.h = utils.random_between(10,54)
+    e.seed = math.random()
+  elseif world == 5 then
+    e.phase = e.phase - 1
+    e.radius = utils.random_between(3,38)
+    e.sides = math.random(3,8)
+    e.seed = math.random()
+  elseif world == 6 then
+    e.phase = e.phase - 1
+    e.seed = math.random()
+  end
+end
+
+function maybe_trigger(world, e)
+  if e.seed < probs[world] then
+    pending_triggers[world] = true
+  end
+end
+
+function tick_event(world, e)
+  local energy = util.linlin(0,1,0.6,2.6,brightnesses[world])
+
+  if world == 1 then
+    e.phase = e.phase + (e.speed * energy)
+    if e.phase > 1 then
+      reset_event(world, e)
+      maybe_trigger(world, e)
+    end
+  elseif world == 2 then
+    e.angle = e.angle + (e.spin * energy)
+    e.phase = e.phase + (0.008 * energy)
+    if e.phase > 1 then
+      reset_event(world, e)
+      maybe_trigger(world, e)
+    end
+  elseif world == 3 then
+    e.phase = e.phase + (0.006 * energy)
+    if e.phase > 1 then
+      reset_event(world, e)
+      maybe_trigger(world, e)
+    end
+  elseif world == 4 then
+    e.phase = e.phase + (0.012 * energy)
+    if e.phase > 1 then
+      reset_event(world, e)
+      maybe_trigger(world, e)
+    end
+  elseif world == 5 then
+    e.angle = e.angle + (e.spin * energy)
+    e.phase = e.phase + (0.01 * energy)
+    if e.phase > 1 then
+      reset_event(world, e)
+      maybe_trigger(world, e)
+    end
+  elseif world == 6 then
+    e.x = e.x + (e.vx * energy)
+    e.y = e.y + (e.vy * energy)
+    e.phase = e.phase + (0.01 * energy)
+
+    if e.x < 4 or e.x > 124 then
+      e.vx = -e.vx
+      e.seed = math.random()
+      maybe_trigger(world, e)
+    end
+    if e.y < 7 or e.y > 60 then
+      e.vy = -e.vy
+      e.seed = math.random()
+      maybe_trigger(world, e)
+    end
+    if e.phase > 1 then
+      reset_event(world, e)
+    end
+  end
+end
 
 function stop_all_worlds()
   for i=1,world_count do
@@ -210,12 +323,12 @@ end
 function init()
   add_params()
   init_all_events()
-  file1 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_sfx_2_Dsharpmin.wav"
-  file2 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_pad_2_Dsharpmin.wav"
-  file3 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_lead_2_Dsharpmin.wav"
-  file4 = _path.code .. "desolution/lib/dce_100_kit_loop_longjump_bass_1_Dsharpmin.wav"
-  file5 = _path.code .. "desolution/lib/dce_120_synth_loop_arp_exist_Dsharpmin.wav"
-  file6 = _path.code .. "desolution/lib/dce_synth_one_shot_pulsar_Dsharpmin.wav"
+  file1 = _path.code .. "ethereum/lib/ethereum/Ethereum 1-Kontakt 8.wav"
+  file2 = _path.code .. "ethereum/lib/ethereum/Ethereum 2-Kontakt 8.wav"
+  file3 = _path.code .. "ethereum/lib/ethereum/Ethereum 3-Kontakt 8.wav"
+  file4 = _path.code .. "ethereum/lib/ethereum/Ethereum 4-Kontakt 8.wav"
+  file5 = _path.code .. "ethereum/lib/ethereum/Ethereum 5-Kontakt 8.wav"
+  file6 = _path.code .. "ethereum/lib/ethereum/Ethereum 6-Analog Lab V.wav"
 
   sc.buffer_clear()
   sc.buffer_read_mono(file1,0,0,-1,1,1)
@@ -248,7 +361,6 @@ function init()
     sc.loop_start(i,start_points[i])
     sc.loop_end(i,start_points[i]+pulse_durations[i])
     sc.position(i,start_points[i])
-
   end
 
   stop_transport()
@@ -270,8 +382,7 @@ function init()
 end
 
 function tick(stage)
-  grid_blink_phase = (grid_blink_phase + (grid_blink_rate / 60.0)) % 1.0
-  grid_blink_on = grid_blink_phase < 0.5
+  world_phase = (world_phase + (1 / 60)) % 1
   redraw(stage)
 end
 
@@ -286,12 +397,6 @@ function trigger_world(world)
   sc.play(world,1)
 end
 
-function maybe_trigger(world, e)
-  if e.seed < probs[world] then
-    pending_triggers[world] = true
-  end
-end
-
 function world_tick(world)
   if not running then
     return
@@ -302,67 +407,8 @@ function world_tick(world)
     return
   end
 
-  if world == 1 then
-    if world_tick_counts[world] % 8 == 0 then
-      local index = world_scan_positions[world] or 1
-      local e = world_events[index]
-      if e ~= nil then
-        maybe_trigger(world, e)
-      end
-      world_scan_positions[world] = (index % #world_events) + 1
-    end
-  elseif world == 2 then
-    for i = 1,#world_events do
-      local e = world_events[i]
-      e.phase = e.phase + 0.015
-      if e.phase > 1 then
-        e.phase = e.phase - 1
-        e.seed = math.random()
-        maybe_trigger(world, e)
-      end
-    end
-  elseif world == 3 then
-    for i = 1,#world_events do
-      local e = world_events[i]
-      e.phase = e.phase + util.linlin(0,1,0.008,0.045,brightnesses[world])
-      if e.phase > 1 then
-        e.x = utils.random_between(0,128)
-        e.y = utils.random_between(0,64)
-        e.phase = e.phase - 1
-        e.seed = math.random()
-        maybe_trigger(world, e)
-      end
-    end
-  else
-    for i = 1,#world_events do
-      local e = world_events[i]
-      if world == 4 then
-        e.z = e.z - util.linlin(0,1,0.6,2.8,brightnesses[world])
-        if e.z < 1 then
-          e.x = utils.random_between(-96,96)
-          e.y = utils.random_between(-48,48)
-          e.z = utils.random_between(45,70)
-          e.seed = math.random()
-          maybe_trigger(world, e)
-        end
-      elseif world == 5 then
-        e.y = e.y + util.linlin(0,1,0.5,2.2,brightnesses[world])
-        if e.y > 64 then
-          e.x = utils.random_between(0,128)
-          e.y = utils.random_between(-40,0)
-          e.radius = utils.random_between(1,3)
-          e.seed = math.random()
-          maybe_trigger(world, e)
-        end
-      elseif world == 6 then
-        e.phase = e.phase + util.linlin(0,1,0.008,0.04,brightnesses[world])
-        if e.phase > 1 then
-          e.phase = e.phase - 1
-          e.seed = math.random()
-          maybe_trigger(world, e)
-        end
-      end
-    end
+  for i = 1,#world_events do
+    tick_event(world, world_events[i])
   end
 end
 
@@ -373,7 +419,6 @@ function enc(n,d)
   elseif n==2 then
     params:delta("world_"..current_world.."_division", d)
   elseif n==3 then
-    -- adjust world probablity
     local prob = probs[current_world] + d/100.0
     probs[current_world] = util.clamp(prob,0,0.9)
   end
